@@ -1,25 +1,25 @@
+import java.util.LinkedList;
+
 public class UndoM {
     private Position fromWhere;
     private Position toWhere;
     private ConcretePiece whoMove;
-    private ConcretePiece whoDied;
-
-    private Position whereDied;
+    private LinkedList<ConcretePiece> whoDied = new LinkedList<>();
+    private LinkedList<Position> whereDied = new LinkedList<>();
     private int undoSquers;
 
-    public UndoM(Position fromWhere,Position toWhere, ConcretePiece whoMove){
-        this.toWhere=toWhere;
-        this.fromWhere=fromWhere;
-        this.whoMove=whoMove;
-        this.whoDied=null;
-        this.whereDied=null;
-        if (fromWhere.getX()==toWhere.getX()) {
-            this.undoSquers = Math.abs(fromWhere.getY()-toWhere.getY());
+    public UndoM(Position fromWhere, Position toWhere, ConcretePiece whoMove) {
+        this.toWhere = toWhere;
+        this.fromWhere = fromWhere;
+        this.whoMove = whoMove;
+        if (fromWhere.getX() == toWhere.getX()) {
+            this.undoSquers = Math.abs(fromWhere.getY() - toWhere.getY());
         } else {
-            this.undoSquers= Math.abs((fromWhere.getX()-toWhere.getX()));
+            this.undoSquers = Math.abs((fromWhere.getX() - toWhere.getX()));
         }
     }
-    public int getUndoSquers(){
+
+    public int getUndoSquers() {
         return this.undoSquers;
     }
 
@@ -47,19 +47,20 @@ public class UndoM {
         this.whoMove = whoMove;
     }
 
-    public ConcretePiece getWhoDied() {
+    public LinkedList<ConcretePiece> getWhoDied() {
         return whoDied;
     }
 
     public void setWhoDied(ConcretePiece whoDied) {
-        this.whoDied = whoDied;
+
+        this.whoDied.add(whoDied);
     }
 
-    public Position getWhereDied() {
+    public LinkedList<Position> getWhereDied() {
         return whereDied;
     }
 
     public void setWhereDied(Position whereDied) {
-        this.whereDied = whereDied;
+        this.whereDied.add(whereDied);
     }
 }
